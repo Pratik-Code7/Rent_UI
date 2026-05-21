@@ -1,0 +1,39 @@
+import React from "react";
+import logo from "../assets/logo.png";
+const Navbar = () => {
+  return (
+    <div className=" sticky top-0 z-50 flex flex-col sm:flex-row w-full  items-center justify-between bg-white md:h-16 px-5 gap-5  ">
+      <div className="flex  gap-6 items-center  ">
+        <div className="h-16 w-30">
+          <a href="/" className="text-l sm:text-xl">
+            <img
+              src={logo}
+              alt="Logo"
+              className="bg-transparent h-full w-full "
+            />
+          </a>
+        </div>
+        <a href="/">Listing</a>
+        <a href="/">Dashboard</a>
+      </div>
+      <div className="flex gap-4 items-center  ">
+        <div className="bg-white flex rounded-full py-1.5 px-5 border-2 border-gray-200 ">
+          <i className="ri-search-line mx-2"></i>
+          <input
+            type="text"
+            placeholder="Search areas..."
+            className="outline-0"
+          />
+        </div>
+        <div className="bg-black py-2 rounded text-white px-5">
+          Post Property
+        </div>
+        <div className="icon bg-black rounded-full p-3 h-10 w-10 flex items-center justify-center">
+          <i className="ri-user-line text-white"></i>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Navbar;
