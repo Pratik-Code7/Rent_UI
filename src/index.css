@@ -18,3 +18,11 @@ hr {
   border: none;
   /* border-top: 20px solid #ccc; */
 }
+.d-li li {
+  border-radius: 10px;
+  background-color: aqua;
+  padding: 0.5rem;
+}
+.dash-right::-webkit-scrollbar {
+  display: none;
+}

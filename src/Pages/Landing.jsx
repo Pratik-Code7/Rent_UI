@@ -53,7 +53,7 @@ const Landing = () => {
       <Navbar />
       <div className="min-h-screen  min-w-full  ">
         <div
-          className="h-[95vh] w-full  lpage relative flex flex-col  justify-center gap-10  bg-cover bg-center  "
+          className="h-[80vh] w-full  lpage relative flex flex-col  justify-center gap-10  bg-cover bg-center  "
           style={{ backgroundImage: `url(${hero})` }}
         >
           <div className="absolute inset-0 bg-black/40"></div>
