@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../Components/Navbar";
 import hero from "../assets/hero.png";
 import { useEffect } from "react";
@@ -6,10 +6,16 @@ import Searchbar from "../Components/Searchbar";
 import video from "../assets/video.mp4";
 import List_item from "../Components/List_item";
 import InfoBox from "../Components/InfoBox";
+import ListItemSkeleton from "../Components/ListItemSkeleton";
 const Landing = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
   }, []);
+  const [loading, setLoading] = useState(true);
   const data = [
     {
       id: 1,
@@ -47,7 +53,7 @@ const Landing = () => {
       <Navbar />
       <div className="min-h-screen  min-w-full  ">
         <div
-          className="h-[80vh] w-full bg-red-500 lpage relative flex flex-col  justify-center gap-10  bg-cover bg-center  "
+          className="h-[95vh] w-full  lpage relative flex flex-col  justify-center gap-10  bg-cover bg-center  "
           style={{ backgroundImage: `url(${hero})` }}
         >
           <div className="absolute inset-0 bg-black/40"></div>
@@ -77,13 +83,25 @@ const Landing = () => {
             <div className="flex flex-col justify-center  gap-5 p-10 text-2xl font-bold ">
               <h1 className="">Featured Listing</h1>
               <div className="listings flex justify-center items-center flex-wrap gap-11 ">
-                {data.map((item) => (
+                {loading
+                  ? Array(6)
+                      .fill(0)
+                      .map((_, i) => <ListItemSkeleton key={i} />)
+                  : data.map((item) => (
+                      <List_item
+                        key={item.id}
+                        image={item.image}
+                        text={item.text}
+                      />
+                    ))}
+
+                {/* {data.map((item) => (
                   <List_item
                     key={item.id}
                     image={item.image}
                     text={item.text}
                   />
-                ))}
+                ))} */}
               </div>
             </div>
           </div>
@@ -100,7 +118,7 @@ const Landing = () => {
           </div>
         </div>
         <footer className=" w-full flex flex-col justify-center items-center  ">
-          <div className="h-0.5 w-full bg-gray-400 "></div>
+          {/* <div className="h-0.5 w-full bg-gray-400 "></div> */}
           <div className="  text-center  w-full flex p-10 justify-between items-center gap-10  ">
             <div className="flex flex-col  w-[35%] h-40 gap-3 text-start ">
               <h1>
@@ -142,9 +160,9 @@ const Landing = () => {
               </ol>
             </div>
           </div>
-          <div className="h-0.5 w-full bg-gray-400"></div>
+          {/* <div className="h-0.5 w-full bg-gray-400"></div> */}
 
-          <div className="w-full h-20  flex justify-center items-center ">
+          <div className="w-full h-20 bg-gray-100 flex justify-center items-center ">
             <p>&copy; 2023 HamroRent. All rights reserved.</p>
           </div>
         </footer>
