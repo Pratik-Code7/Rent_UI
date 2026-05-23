@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import logo from "../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 const Navbar = () => {
   const [login, setlogin] = useState(false);
+  const navigate = useNavigate();
   return (
     <div className=" sticky top-0 z-50 flex flex-col sm:flex-row w-full  items-center justify-between bg-white md:h-16 px-5 gap-5  ">
       <div className="flex  gap-6 items-center  ">
@@ -38,6 +39,7 @@ const Navbar = () => {
           <div
             className="bg-black py-2 px-5 rounded text-white cursor-pointer"
             onClick={() => {
+              navigate("/auth");
               setlogin(true);
             }}
           >

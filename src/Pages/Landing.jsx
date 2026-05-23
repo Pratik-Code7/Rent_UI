@@ -53,10 +53,10 @@ const Landing = () => {
       <Navbar />
       <div className="min-h-screen  min-w-full  ">
         <div
-          className="h-[80vh] w-full  lpage relative flex flex-col  justify-center gap-10  bg-cover bg-center  "
+          className="h-[95vh] w-full  lpage relative flex flex-col  justify-center gap-10  bg-cover bg-center  "
           style={{ backgroundImage: `url(${hero})` }}
         >
-          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="absolute inset-0 bg-black/20"></div>
 
           {/* <video
             src={video}
@@ -67,10 +67,10 @@ const Landing = () => {
             className="w-full h-full object-cover absolute "
           ></video> */}
           <div className="absolute z-10 flex flex-col justify-center gap-6  mx-10  ">
-            <div className="text-5xl text-white font-bold  leading-tight">
+            <div className="text-5xl  font-bold  leading-tight">
               Find your next <br /> home in Nepal
             </div>
-            <p className="text-xl text-white ">
+            <p className="text-xl  ">
               Buy, Sell, Rent properties with ease.
               <br />
               Trusted by thousands of users across Nepal.
