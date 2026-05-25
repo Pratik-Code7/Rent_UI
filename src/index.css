@@ -24,5 +24,5 @@ hr {
   padding: 0.5rem;
 }
 .dash-right::-webkit-scrollbar {
-  display: none;
+  /* display: none; */
 }

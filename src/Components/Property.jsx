@@ -36,13 +36,14 @@ const Property = () => {
           <h1 className=" text-3xl font-bold py-2">My Properties</h1>
           <p>Manage your active properties and track their performance.</p>
         </div>
-        <div className="views flex justify-between pt-10 text-sm  ">
+        <div className="views grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-10 text-sm">
           {dashStats.map((elem, idx) => (
-            <div key={idx} className="flex flex-col items-center gap-2">
-              <div className="h-16 w-64 flex flex-col justify-center  py-2 px-5 bg-white rounded-xl shadow-md  ">
-                <h1 className="font-bold">{elem.title}</h1>
-                <p>{elem.value}</p>
-              </div>
+            <div
+              key={idx}
+              className="flex flex-col items-start gap-2 bg-white rounded-xl shadow-md p-4"
+            >
+              <h1 className="font-bold">{elem.title}</h1>
+              <p>{elem.value}</p>
             </div>
           ))}
         </div>
