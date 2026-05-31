@@ -29,7 +29,7 @@ const Navbar = () => {
           />
         </div>
         <div className="hidden md:block bg-black py-2 rounded text-white px-5 cursor-pointer">
-          Post Property
+          <Link to="/post">Post Property</Link>
         </div>
         {login ? (
           <div className="flex icon bg-black rounded-full p-3 h-10 w-10  items-center justify-center">
