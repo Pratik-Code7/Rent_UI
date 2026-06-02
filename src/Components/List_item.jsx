@@ -13,7 +13,7 @@ const List_item = ({ image, text }) => {
       </div>
 
       {/* CONTENT */}
-      <div className="p-4 flex flex-col gap-2">
+      <div className="p-4 flex flex-col gap-1">
         <h2 className="text-base sm:text-lg font-semibold">{text}</h2>
 
         <div className="flex items-center gap-2 text-gray-700">
@@ -21,12 +21,12 @@ const List_item = ({ image, text }) => {
           <p className="text-sm">Lorem ipsum dolor sit amet</p>
         </div>
 
-        <div className="flex flex-wrap gap-2 text-xs font-medium text-gray-600 mt-2">
-          <div className="bg-gray-200 rounded-lg px-3 py-1">1 Room</div>
+        <div className="flex flex-wrap gap-2 text-xs font-medium text-gray-600 ">
+          <div className="bg-gray-200 rounded-lg px-3 py-2">1 Room</div>
 
-          <div className="bg-gray-200 rounded-lg px-3 py-1">2 Bath</div>
+          <div className="bg-gray-200 rounded-lg px-3 py-2">2 Bath</div>
 
-          <div className="bg-gray-200 rounded-lg px-3 py-1">1200 sqft</div>
+          <div className="bg-gray-200 rounded-lg px-3 py-2">1200 sqft</div>
         </div>
       </div>
     </div>
