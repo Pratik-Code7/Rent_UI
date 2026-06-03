@@ -1,136 +1,117 @@
 import React, { useState } from "react";
-import Navbar from "../Components/Navbar";
-import Favorites from "../Components/Favorites";
 import Fav_Comp from "../Components/Fav_Comp";
+
 const Listing = () => {
   const [active, setactive] = useState(0);
-  const dashList = [
-    "My Properties",
-    "Favorites",
-    "Notifications",
-    "Profile Settings",
-  ];
+
   return (
-    <div className="h-screen  w-full bg-gray-100 overflow-hidden">
-      <Navbar />
-      <div className="Dash-Box flex  items-center h-full justify-center  ">
-        <div className=" bg-white h-full w-1/4  flex flex-col gap-3 py-5 px-8 overflow-y-auto text-sm">
-          <div className="List-txt  ">
-            <h1 className=" ">
-              <i className="ri-filter-line"></i> Filter Properties
-            </h1>
-          </div>
-          <div className="">
-            {/* Heading */}
+    <div className="min-h-screen bg-gray-50 px-4 py-6">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-6">
+        {/* FILTER SIDEBAR */}
+        <div className="w-full md:w-1/3 lg:w-1/4 bg-white p-5 rounded-2xl shadow-md h-fit">
+          <h2 className="text-xl font-semibold mb-4">
+            <i className="ri-filter-line text-xm font-semibold"></i> Filter
+            Properties
+          </h2>
 
-            {/* Filter Form */}
-            <form className="flex flex-col gap-5">
-              {/* Search */}
-              <div className="flex flex-col gap-2">
-                <label>Location</label>
-                <input
-                  type="text"
-                  placeholder="Search Location..."
-                  className="border border-gray-300 rounded-xl px-4 py-1.5 outline-none focus:border-black"
-                />
+          <form className="flex flex-col gap-5">
+            {/* Location */}
+            <div className="flex flex-col gap-2">
+              <label>Location</label>
+              <input
+                type="text"
+                placeholder="Search Location..."
+                className="border border-gray-300 rounded-xl px-4 py-2 outline-none focus:border-black"
+              />
+            </div>
+
+            {/* Property Type */}
+            <div className="flex flex-col gap-2 text-sm">
+              <label>Property Type</label>
+              <select className="border border-gray-300 px-4 py-2 rounded-lg outline-none focus:border-black">
+                <option>All</option>
+                <option>Apartment</option>
+                <option>Villa</option>
+                <option>House</option>
+                <option>Office</option>
+              </select>
+            </div>
+
+            {/* Price Range */}
+            <div className="flex flex-col gap-3">
+              <div className="flex justify-between">
+                <label>Price Range</label>
+                <span className="text-sm text-gray-500">$500 - $5000</span>
               </div>
 
-              {/* Property Type */}
-              <div className="flex flex-col gap-2 text-sm">
-                <label>Property Type</label>
-                <select className="border border-gray-300  px-4 py-2 rounded-lg outline-none text-sm focus:border-black ">
-                  <option>All</option>
-                  <option>Apartment</option>
-                  <option>Villa</option>
-                  <option>House</option>
-                  <option>Office</option>
-                </select>
+              <input
+                type="range"
+                min="500"
+                max="5000"
+                className="w-full accent-black"
+              />
+            </div>
+
+            {/* Bedrooms */}
+            <div className="flex flex-col gap-2">
+              <label>Bedrooms</label>
+              <select className="border border-gray-300 rounded-lg px-4 py-2">
+                <option>Any</option>
+                <option>1 Bedroom</option>
+                <option>2 Bedrooms</option>
+                <option>3 Bedrooms</option>
+                <option>4+ Bedrooms</option>
+              </select>
+            </div>
+
+            {/* Bathrooms */}
+            <div className="flex flex-col gap-2">
+              <label>Bathrooms</label>
+              <select className="border border-gray-300 rounded-lg px-4 py-2">
+                <option>Any</option>
+                <option>1 Bathroom</option>
+                <option>2 Bathrooms</option>
+                <option>3+ Bathrooms</option>
+              </select>
+            </div>
+
+            {/* Amenities */}
+            <div className="flex flex-col gap-3">
+              <label>Facilities</label>
+
+              <div className="grid grid-cols-2 gap-2 text-sm">
+                {["Parking", "Swimming Pool", "Gym", "WiFi"].map((item) => (
+                  <label key={item} className="flex items-center gap-2">
+                    <input type="checkbox" />
+                    {item}
+                  </label>
+                ))}
               </div>
+            </div>
 
-              {/* Price Range */}
-              <div className="flex flex-col gap-3">
-                <div className="flex justify-between">
-                  <label>Price Range</label>
-                  <span className="text-sm text-gray-500">$500 - $5000</span>
-                </div>
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 mt-2">
+              <button
+                type="submit"
+                className="bg-black text-white py-2 rounded-xl w-full"
+              >
+                Apply
+              </button>
 
-                <input
-                  type="range"
-                  min="500"
-                  max="5000"
-                  className="w-full cursor-pointer accent-black"
-                />
-              </div>
-
-              {/* Bedrooms */}
-              <div className="flex flex-col gap-2">
-                <label>Bedrooms</label>
-                <select className="border border-gray-300 rounded-lg px-4 py-2 outline-none focus:border-black">
-                  <option>Any</option>
-                  <option>1 Bedroom</option>
-                  <option>2 Bedrooms</option>
-                  <option>3 Bedrooms</option>
-                  <option>4+ Bedrooms</option>
-                </select>
-              </div>
-
-              {/* Bathrooms */}
-              <div className="flex flex-col gap-2">
-                <label>Bathrooms</label>
-                <select className="border border-gray-300 rounded-lg px-4 py-2 outline-none focus:border-black">
-                  <option>Any</option>
-                  <option>1 Bathroom</option>
-                  <option>2 Bathrooms</option>
-                  <option>3+ Bathrooms</option>
-                </select>
-              </div>
-
-              {/* Amenities */}
-              <div className="flex flex-col gap-3">
-                <label>Facilities</label>
-
-                <div className="flex items-center gap-2">
-                  <input type="checkbox" />
-                  <span>Parking</span>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <input type="checkbox" />
-                  <span>Swimming Pool</span>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <input type="checkbox" />
-                  <span>Gym</span>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <input type="checkbox" />
-                  <span>WiFi</span>
-                </div>
-              </div>
-
-              {/* Buttons */}
-              <div className="flex gap-3 mt-2">
-                <button
-                  type="submit"
-                  className="bg-black text-white py-3  rounded-xl w-full hover:opacity-90"
-                >
-                  Apply Filters
-                </button>
-
-                <button
-                  type="reset"
-                  className="border border-gray-300 py-3 rounded-xl w-full hover:bg-gray-100"
-                >
-                  Reset
-                </button>
-              </div>
-            </form>
-          </div>
+              <button
+                type="reset"
+                className="border border-gray-300 py-2 rounded-xl w-full"
+              >
+                Reset
+              </button>
+            </div>
+          </form>
         </div>
 
-        <Fav_Comp />
+        {/* RIGHT CONTENT */}
+        <div className="flex-1">
+          <Fav_Comp />
+        </div>
       </div>
     </div>
   );

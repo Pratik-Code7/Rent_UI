@@ -23,6 +23,6 @@ hr {
   background-color: aqua;
   padding: 0.5rem;
 }
-.dash-right::-webkit-scrollbar {
-  /* display: none; */
+::-webkit-scrollbar {
+  display: none;
 }

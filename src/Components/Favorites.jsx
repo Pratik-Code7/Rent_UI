@@ -36,15 +36,17 @@ const Favorites = () => {
     },
   ];
   return (
-    <div className="dash-right h-full overflow-y-auto  w-full flex flex-wrap gap-10 ">
+    <div className="dash-right h-full overflow-y-auto  w-full flex flex-col gap-10 ">
       <Fav_Comp />
-      <div className="w-full h-24 p-20 mx-10 mb-20 bg-white  rounded-2xl flex justify-center items-center  gap-10">
+      <div className="w-full h-24 p-20  bg-white  rounded-2xl flex justify-center items-center  gap-10">
         <div className="bg-gray-100 rounded-full text-4xl  h-18 w-18 flex justify-center items-center">
           <i class="ri-folder-open-fill"></i>
         </div>
         <div className="w-72">
-          <h1 className="font-bold">Save properties you love</h1>
-          <p>
+          <h1 className="text-sm md:text-md font-bold">
+            Save properties you love
+          </h1>
+          <p className="text-xs md:text-sm text-gray-600">
             Click the heart icon on any property to save it for easy access
             later
           </p>

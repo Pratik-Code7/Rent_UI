@@ -24,7 +24,7 @@ const Auth = () => {
     onError: () => console.log("Login Failed"),
   });
   return (
-    <div className=" flex justify-center items-center h-screen w-screen bg-white p-5">
+    <div className=" flex justify-center items-center h-screen w-screen bg-white p-5 ">
       <div className="container bg-white rounded-2xl  flex flex-col  h-auto w-100 p-6  md:w-96">
         <div className="textbox flex justify-center items-center flex-col mt-3  gap-1">
           <h1 className="font-bold text-2xl">Welcome Back</h1>

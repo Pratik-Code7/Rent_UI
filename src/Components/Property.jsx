@@ -5,8 +5,9 @@ const Property = () => {
     { title: "TOTAL LIKES", value: 120 },
     { title: "INQUIRIES", value: 45 },
     { title: "APPLICATIONS", value: 18 },
-    { title: "APPLICATIONS", value: 18 },
+    { title: "ACTIVE LISTINGS", value: 18 },
   ];
+
   const items = [
     {
       img: "https://images.unsplash.com/photo-1560448204-603b3fc33ddc",
@@ -29,73 +30,86 @@ const Property = () => {
       title: "Minimal Studio",
     },
   ];
+
   return (
-    <div className="dash-right  overflow-y-auto h-full w-full flex flex-col  p-10  gap-10 ">
-      <div>
-        <div className="dash-txt  ">
-          <h1 className=" text-3xl font-bold py-2">My Properties</h1>
-          <p>Manage your active properties and track their performance.</p>
-        </div>
-        <div className="views grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pt-10 text-sm">
-          {dashStats.map((elem, idx) => (
-            <div
-              key={idx}
-              className="flex flex-col items-start gap-2 bg-white rounded-xl shadow-md p-4"
-            >
-              <h1 className="font-bold">{elem.title}</h1>
-              <p>{elem.value}</p>
-            </div>
-          ))}
-        </div>
+    <div className="w-full h-full p-4 md:p-6 overflow-y-auto">
+      {/* Header */}
+      <div className="mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold">My Properties</h1>
+        <p className="text-gray-500">
+          Manage your active properties and track their performance.
+        </p>
       </div>
 
-      <div className="property-items gap-5 flex flex-col md:mb-10">
+      {/* Stats */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        {dashStats.map((elem, idx) => (
+          <div key={idx} className="bg-white p-4 rounded-xl shadow-lg ">
+            <h3 className="text-sm text-gray-500">{elem.title}</h3>
+            <p className="text-xl font-bold">{elem.value}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Property List */}
+      <div className="flex flex-col gap-5">
         {items.map((elem, idx) => (
-          <div className="h-64 w-full bg-white rounded-2xl overflow-hidden flex ">
-            <div className="img h-full w-1/3 relative">
+          <div
+            key={idx}
+            className="w-full bg-white rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-lg "
+          >
+            {/* Image */}
+            <div className="relative h-56 md:h-auto md:w-1/3">
               <img
-                loading="lazy"
                 src={elem.img}
-                alt=""
-                className="h-full  object-cover absolute z-0 "
+                alt={elem.title}
+                className="w-full h-full object-cover"
               />
-              <div className="status absolute z-10 bg-white px-2 py-0.5  rounded-xl mx-3 mt-3">
+
+              <div className="absolute top-3 left-3 bg-white px-2 py-1 rounded-xl text-xs">
                 Active
               </div>
             </div>
-            <div className="details w-full bg-white flex flex-col px-8 justify-between">
-              <div className=" py-5 ">
-                <div className="dash-title flex justify-between w-full py-1 text-xl">
-                  <h1>
-                    <b>{elem.title}</b>
-                  </h1>
-                  <p className="px-5">$1000</p>
+
+            {/* Details */}
+            <div className="w-full flex flex-col justify-between p-4 md:p-6">
+              <div>
+                {/* Title */}
+                <div className="flex  md:flex-row justify-between gap-2">
+                  <h2 className="text-lg font-bold">{elem.title}</h2>
+                  <p className="font-semibold">$1000</p>
                 </div>
-                <div className="detail-icons flex  gap-5 ">
-                  <div className="text-sm ">1 Bed</div>
-                  <div className="text-sm ">1 Bed</div>
+
+                {/* Features */}
+                <div className="flex flex-wrap gap-3 mt-2 text-sm text-gray-600">
+                  <span>1 Bed</span>
+                  <span>1 Bath</span>
                 </div>
-                <div className="dash-location flex items-center gap-1 py-2 ">
+
+                {/* Location */}
+                <div className="flex items-center gap-2 mt-2 text-sm text-gray-600">
                   <i className="ri-map-pin-2-fill"></i>
-                  <p className=" text-sm">Lorem ipsum dolor sit amet</p>
+                  <span>Lorem ipsum dolor sit amet</span>
                 </div>
-                <div className="dash-review text-sm">
-                  <i className="ri-star-fill text-yellow-300"></i> Rating(
-                  4.5/5)
+
+                {/* Rating */}
+                <div className="mt-2 text-sm">
+                  <i className="ri-star-fill text-yellow-400"></i>
+                  <span> Rating (4.5/5)</span>
                 </div>
               </div>
-              <div className="w-full  h-[28%] flex flex-col gap-5">
-                <div className="h-0.5 bg-gray-400"></div>
-                <div className="posted text-sm  flex items-center w-full  h-[25%] justify-between">
-                  <div>Posted 2 days ago</div>
-                  <div className="btns flex gap-10  px-4">
-                    <button>
-                      <i className="ri-pencil-line"></i> Edit
-                    </button>
-                    <button className="text-red-500">
-                      <i className="ri-delete-bin-line"></i> Delete
-                    </button>
-                  </div>
+
+              {/* Footer */}
+              <div className="mt-5 border-t pt-4 flex  md:flex-row justify-between items-start md:items-center gap-3 text-sm">
+                <span className="text-gray-500">Posted 2 days ago</span>
+
+                <div className="flex gap-4">
+                  <button className="hover:text-blue-600">
+                    <i className="ri-pencil-line"></i> Edit
+                  </button>
+                  <button className="text-red-500 hover:text-red-600">
+                    <i className="ri-delete-bin-line"></i> Delete
+                  </button>
                 </div>
               </div>
             </div>
