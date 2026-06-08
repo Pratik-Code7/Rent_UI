@@ -1,66 +1,113 @@
 import React, { useState } from "react";
 import logo from "../assets/logo.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+
 const Navbar = () => {
-  const [login, setlogin] = useState(false);
+  const [login, setLogin] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
+
+  const navLinks = [
+    { to: "/listing", label: "Listings" },
+    { to: "/dashboard", label: "Dashboard" },
+  ];
+
+  const linkClass = ({ isActive }) =>
+    `text-sm font-medium transition-colors ${
+      isActive
+        ? "text-primary"
+        : "text-muted-foreground hover:text-foreground"
+    }`;
+
+  const goAuth = () => {
+    navigate("/auth");
+    setLogin(true);
+    setMenuOpen(false);
+  };
+
   return (
-    <nav className=" sticky top-0 z-50 w-full bg-white px-4 sm:px-6 py-3 md:py-0 flex flex-col sm:flex-row items-center justify-between  gap-1   ">
-      <div className="flex  gap-6 items-center  ">
-        <div className="h-16 w-30">
-          <a href="/" className="text-l sm:text-xl">
-            <img
-              src={logo}
-              alt="Logo"
-              className=" h-full w-full object-cover "
-            />
-          </a>
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-card/95 backdrop-blur">
+      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        {/* Left: logo + desktop links */}
+        <div className="flex items-center gap-8">
+          <Link to="/" className="flex shrink-0 items-center" aria-label="HamroRent home">
+            <img src={logo || "/placeholder.svg"} alt="HamroRent" className="h-8 w-auto object-contain" />
+          </Link>
+
+          <div className="hidden items-center gap-6 md:flex">
+            {navLinks.map((link) => (
+              <NavLink key={link.to} to={link.to} className={linkClass}>
+                {link.label}
+              </NavLink>
+            ))}
+          </div>
         </div>
-        <Link to="/listing">Listing</Link>
-        <Link to="/dashboard">Dashboard</Link>
-        {!login && (
-          <button
-            onClick={() => {
-              navigate("/auth");
-              setlogin(true);
-            }}
-            className="sm:hidden flex items-center justify-center bg-black text-white rounded-full h-8 w-8"
-          >
-            <i className="ri-user-line text-sm"></i>
-          </button>
-        )}
-      </div>
-      <div className="flex gap-4 items-center  w-full sm:w-auto  ">
-        <div className=" bg-white w-full  flex rounded-full py-1.5 px-5 border-2 border-gray-200 ">
-          <i className="ri-search-line mx-2"></i>
-          <input
-            type="text"
-            placeholder="Search areas..."
-            className="outline-0"
-          />
-        </div>
-        <div className="hidden md:block bg-black py-2 w-full rounded text-white px-5 cursor-pointer">
-          <Link to="/post">Post Property</Link>
-        </div>
-        <div className="hidden sm:flex">
+
+        {/* Right: actions */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Link to="/post" className="btn btn-accent hidden sm:inline-flex">
+            <i className="ri-add-line text-base" aria-hidden="true"></i>
+            Post Property
+          </Link>
+
           {login ? (
-            <div className="flex icon bg-black rounded-full p-3 h-10 w-10  items-center justify-center">
-              <i className="ri-user-line text-white"></i>
-            </div>
-          ) : (
-            <div
-              className="  bg-black py-2 px-5 rounded text-white cursor-pointer"
-              onClick={() => {
-                navigate("/auth");
-                setlogin(true);
-              }}
+            <button
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground"
+              aria-label="Account"
             >
-              Login
-            </div>
+              <i className="ri-user-line" aria-hidden="true"></i>
+            </button>
+          ) : (
+            <button onClick={goAuth} className="btn btn-primary hidden sm:inline-flex">
+              Log in
+            </button>
           )}
+
+          {/* Mobile menu toggle */}
+          <button
+            className="flex h-10 w-10 items-center justify-center rounded-md text-foreground md:hidden"
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+          >
+            <i className={`text-xl ${menuOpen ? "ri-close-line" : "ri-menu-line"}`} aria-hidden="true"></i>
+          </button>
         </div>
-      </div>
-    </nav>
+      </nav>
+
+      {/* Mobile menu */}
+      {menuOpen && (
+        <div className="border-t border-border bg-card px-4 py-4 md:hidden">
+          <div className="flex flex-col gap-1">
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                onClick={() => setMenuOpen(false)}
+                className={({ isActive }) =>
+                  `rounded-md px-3 py-2.5 text-sm font-medium ${
+                    isActive ? "bg-muted text-primary" : "text-muted-foreground hover:bg-muted"
+                  }`
+                }
+              >
+                {link.label}
+              </NavLink>
+            ))}
+          </div>
+          <div className="mt-3 flex flex-col gap-2 border-t border-border pt-3">
+            <Link to="/post" onClick={() => setMenuOpen(false)} className="btn btn-accent w-full">
+              <i className="ri-add-line text-base" aria-hidden="true"></i>
+              Post Property
+            </Link>
+            {!login && (
+              <button onClick={goAuth} className="btn btn-primary w-full">
+                Log in
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+    </header>
   );
 };
 

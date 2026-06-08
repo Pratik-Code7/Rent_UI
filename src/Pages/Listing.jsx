@@ -1,124 +1,123 @@
-import React, { useState } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../Components/Navbar";
 import Fav_Comp from "../Components/Fav_Comp";
 
 const Listing = () => {
-  const [active, setactive] = useState(0);
+  const navigate = useNavigate();
+
+  const facilities = ["Parking", "Swimming Pool", "Gym", "WiFi"];
+  const selectClass =
+    "field-input appearance-none";
 
   return (
-    <div className="min-h-screen bg-gray-50 px-10 py-8 ">
-      <div className="mb-4">
+    <div className="min-h-screen bg-background">
+      <Navbar />
+
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        {/* Breadcrumb / back */}
         <button
-          onClick={() => window.history.back()}
-          className="text-sm text-gray-600 hover:text-black flex items-center gap-1 bg-white px-3 py-1 rounded-lg shadow-sm"
+          onClick={() => navigate(-1)}
+          className="mb-5 inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
         >
-          <i class="ri-arrow-go-back-line"></i> Back
+          <i className="ri-arrow-left-line" aria-hidden="true"></i> Back
         </button>
-      </div>
-      <div className="w-full  mx-auto flex flex-col md:flex-row gap-6  ">
-        {/* FILTER SIDEBAR */}
-        <div className="w-full  md:w-1/3 lg:w-1/4 bg-white p-5 rounded-2xl shadow-md  ">
-          <h2 className="text-xl font-semibold mb-4">
-            <i className="ri-filter-line text-xm font-semibold"></i> Filter
-            Properties
-          </h2>
 
-          <form className="flex flex-col gap-5">
-            {/* Location */}
-            <div className="flex flex-col gap-2">
-              <label>Location</label>
-              <input
-                type="text"
-                placeholder="Search Location..."
-                className="border border-gray-300 rounded-xl px-4 py-2 outline-none focus:border-black"
-              />
+        <div className="flex flex-col gap-6 lg:flex-row">
+          {/* FILTER SIDEBAR */}
+          <aside className="w-full lg:w-72 lg:shrink-0">
+            <div className="rounded-xl border border-border bg-card p-5 shadow-sm lg:sticky lg:top-20">
+              <h2 className="flex items-center gap-2 font-display text-lg font-semibold text-foreground">
+                <i className="ri-equalizer-line text-accent" aria-hidden="true"></i>
+                Filters
+              </h2>
+
+              <form className="mt-5 flex flex-col gap-5" onSubmit={(e) => e.preventDefault()}>
+                <div className="flex flex-col gap-1.5">
+                  <label className="field-label">Location</label>
+                  <input type="text" placeholder="Search location..." className="field-input" />
+                </div>
+
+                <div className="flex flex-col gap-1.5">
+                  <label className="field-label">Property Type</label>
+                  <select className={selectClass} defaultValue="All">
+                    <option>All</option>
+                    <option>Apartment</option>
+                    <option>Villa</option>
+                    <option>House</option>
+                    <option>Office</option>
+                  </select>
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center justify-between">
+                    <label className="field-label">Price Range</label>
+                    <span className="text-xs text-muted-foreground">Rs 10k - 5L</span>
+                  </div>
+                  <input type="range" min="500" max="5000" defaultValue="2500" className="w-full accent-[var(--color-accent)]" />
+                </div>
+
+                <div className="flex flex-col gap-1.5">
+                  <label className="field-label">Bedrooms</label>
+                  <select className={selectClass} defaultValue="Any">
+                    <option>Any</option>
+                    <option>1 Bedroom</option>
+                    <option>2 Bedrooms</option>
+                    <option>3 Bedrooms</option>
+                    <option>4+ Bedrooms</option>
+                  </select>
+                </div>
+
+                <div className="flex flex-col gap-1.5">
+                  <label className="field-label">Bathrooms</label>
+                  <select className={selectClass} defaultValue="Any">
+                    <option>Any</option>
+                    <option>1 Bathroom</option>
+                    <option>2 Bathrooms</option>
+                    <option>3+ Bathrooms</option>
+                  </select>
+                </div>
+
+                <div className="flex flex-col gap-2.5">
+                  <label className="field-label">Facilities</label>
+                  <div className="grid grid-cols-2 gap-2.5">
+                    {facilities.map((item) => (
+                      <label key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <input type="checkbox" className="h-4 w-4 rounded border-input accent-[var(--color-primary)]" />
+                        {item}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex gap-3 border-t border-border pt-4">
+                  <button type="submit" className="btn btn-primary w-full">Apply</button>
+                  <button type="reset" className="btn btn-outline w-full">Reset</button>
+                </div>
+              </form>
             </div>
+          </aside>
 
-            {/* Property Type */}
-            <div className="flex flex-col gap-2 text-sm">
-              <label>Property Type</label>
-              <select className="border border-gray-300 px-4 py-2 rounded-lg outline-none focus:border-black">
-                <option>All</option>
-                <option>Apartment</option>
-                <option>Villa</option>
-                <option>House</option>
-                <option>Office</option>
-              </select>
-            </div>
-
-            {/* Price Range */}
-            <div className="flex flex-col gap-3">
-              <div className="flex justify-between">
-                <label>Price Range</label>
-                <span className="text-sm text-gray-500">$500 - $5000</span>
+          {/* RESULTS */}
+          <div className="min-w-0 flex-1">
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <h1 className="font-display text-xl font-bold text-foreground sm:text-2xl">Available properties</h1>
+                <p className="text-sm text-muted-foreground">6 results found</p>
               </div>
-
-              <input
-                type="range"
-                min="500"
-                max="5000"
-                className="w-full accent-black"
-              />
-            </div>
-
-            {/* Bedrooms */}
-            <div className="flex flex-col gap-2">
-              <label>Bedrooms</label>
-              <select className="border border-gray-300 rounded-lg px-4 py-2">
-                <option>Any</option>
-                <option>1 Bedroom</option>
-                <option>2 Bedrooms</option>
-                <option>3 Bedrooms</option>
-                <option>4+ Bedrooms</option>
-              </select>
-            </div>
-
-            {/* Bathrooms */}
-            <div className="flex flex-col gap-2">
-              <label>Bathrooms</label>
-              <select className="border border-gray-300 rounded-lg px-4 py-2">
-                <option>Any</option>
-                <option>1 Bathroom</option>
-                <option>2 Bathrooms</option>
-                <option>3+ Bathrooms</option>
-              </select>
-            </div>
-
-            {/* Amenities */}
-            <div className="flex flex-col gap-3">
-              <label>Facilities</label>
-
-              <div className="grid grid-cols-2 gap-2 text-sm">
-                {["Parking", "Swimming Pool", "Gym", "WiFi"].map((item) => (
-                  <label key={item} className="flex items-center gap-2">
-                    <input type="checkbox" />
-                    {item}
-                  </label>
-                ))}
+              <div className="relative">
+                <select className="field-input appearance-none pr-9 text-sm" defaultValue="Recommended">
+                  <option>Recommended</option>
+                  <option>Price: Low to High</option>
+                  <option>Price: High to Low</option>
+                  <option>Newest</option>
+                </select>
+                <i className="ri-arrow-down-s-line pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" aria-hidden="true"></i>
               </div>
             </div>
 
-            {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 mt-2">
-              <button
-                type="submit"
-                className="bg-black text-white py-2 rounded-xl w-full"
-              >
-                Apply
-              </button>
-
-              <button
-                type="reset"
-                className="border border-gray-300 py-2 rounded-xl w-full"
-              >
-                Reset
-              </button>
-            </div>
-          </form>
-        </div>
-
-        {/* RIGHT CONTENT */}
-        <div className="h-screen overflow-y-auto">
-          <Fav_Comp />
+            <Fav_Comp />
+          </div>
         </div>
       </div>
     </div>

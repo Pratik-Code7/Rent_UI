@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Auth from "./Pages/Auth";
 import DashBoard from "./Pages/DashBoard";
 import Listing from "./Pages/Listing";
-import Post from "./Pages/post";
+import Post from "./Pages/Post";
 const App = () => {
   return (
     <Routes>

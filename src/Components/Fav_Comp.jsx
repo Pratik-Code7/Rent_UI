@@ -2,81 +2,54 @@ import React from "react";
 
 const Fav_Comp = () => {
   const properties = [
-    {
-      id: 1,
-      title: "Modern Apartment",
-      img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688",
-    },
-    {
-      id: 2,
-      title: "Luxury Villa",
-      img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750",
-    },
-    {
-      id: 3,
-      title: "Cozy Cottage",
-      img: "https://images.unsplash.com/photo-1448630360428-65456885c650",
-    },
-    {
-      id: 4,
-      title: "City Penthouse",
-      img: "https://images.unsplash.com/photo-1494526585095-c41746248156",
-    },
-    {
-      id: 5,
-      title: "Beach House",
-      img: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
-    },
-    {
-      id: 6,
-      title: "Mountain Cabin",
-      img: "https://images.unsplash.com/photo-1460317442991-0ec209397118",
-    },
+    { id: 1, title: "Modern Apartment", img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688", price: "Rs 45,000/mo", location: "Lazimpat, Kathmandu", beds: 2, baths: 2, area: "1,200" },
+    { id: 2, title: "Luxury Villa", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750", price: "Rs 1.2L/mo", location: "Budhanilkantha, KTM", beds: 4, baths: 3, area: "3,400" },
+    { id: 3, title: "Cozy Cottage", img: "https://images.unsplash.com/photo-1448630360428-65456885c650", price: "Rs 38,000/mo", location: "Tokha, KTM", beds: 2, baths: 1, area: "950" },
+    { id: 4, title: "City Penthouse", img: "https://images.unsplash.com/photo-1494526585095-c41746248156", price: "Rs 95,000/mo", location: "Durbar Marg, KTM", beds: 3, baths: 2, area: "1,800" },
+    { id: 5, title: "Beach House", img: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85", price: "Rs 1.5L/mo", location: "Sanepa, Lalitpur", beds: 4, baths: 4, area: "2,600" },
+    { id: 6, title: "Mountain Cabin", img: "https://images.unsplash.com/photo-1460317442991-0ec209397118", price: "Rs 55,000/mo", location: "Bhaisepati, Lalitpur", beds: 2, baths: 2, area: "1,400" },
   ];
 
   return (
-    <div className="w-full flex flex-col gap-5">
+    <div className="flex w-full flex-col gap-4">
       {properties.map((elem) => (
         <div
           key={elem.id}
-          className="bg-white rounded-2xl overflow-hidden shadow-lg  flex flex-col md:flex-row"
+          className="flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm md:flex-row"
         >
           {/* Image */}
-          <div className="relative h-56 md:h-auto md:w-1/3">
-            <img
-              src={elem.img}
-              alt={elem.title}
-              className="w-full h-full object-cover"
-            />
-
-            <div className="absolute top-3 left-3 bg-white px-2 py-1 rounded text-sm">
-              Saved
-            </div>
+          <div className="relative h-48 md:h-auto md:w-56 md:shrink-0">
+            <img src={elem.img || "/placeholder.svg"} alt={elem.title} crossOrigin="anonymous" className="h-full w-full object-cover" />
+            <span className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-card/95 px-2.5 py-1 text-xs font-semibold text-accent shadow-xs">
+              <i className="ri-heart-fill" aria-hidden="true"></i> Saved
+            </span>
           </div>
 
           {/* Content */}
-          <div className="p-4 md:p-6 flex flex-col justify-between w-full">
-            <div>
-              <h2 className="text-lg font-bold">{elem.title}</h2>
-              <div className="flex items-center  gap-2 mt-2 text-gray-500">
-                <i className="ri-map-pin-2-fill"></i>
-                <p className="text-sm text-gray-500 ">
-                  Lorem ipsum dolor sit amet
-                </p>
+          <div className="flex w-full flex-col justify-between p-4 md:p-5">
+            <div className="flex flex-col gap-2.5">
+              <div className="flex items-start justify-between gap-3">
+                <h2 className="font-display text-lg font-semibold text-foreground">{elem.title}</h2>
+                <p className="shrink-0 font-display text-lg font-bold text-primary">{elem.price}</p>
               </div>
-
-              <div className="flex flex-wrap gap-3 mt-3 text-sm text-gray-600">
-                <span>1 Room</span>
-                <span>2 Bath</span>
-                <span>1200 sqft</span>
+              <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                <i className="ri-map-pin-2-line text-accent" aria-hidden="true"></i>
+                <span>{elem.location}</span>
+              </div>
+              <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                <span className="flex items-center gap-1.5"><i className="ri-hotel-bed-line" aria-hidden="true"></i>{elem.beds} Beds</span>
+                <span className="flex items-center gap-1.5"><i className="ri-drop-line" aria-hidden="true"></i>{elem.baths} Baths</span>
+                <span className="flex items-center gap-1.5"><i className="ri-ruler-line" aria-hidden="true"></i>{elem.area} sqft</span>
               </div>
             </div>
 
-            {/* Price section */}
-            <div className="mt-4 border-t pt-4 flex justify-between items-center">
-              <p className="font-semibold">Rs $10000/mo</p>
-
-              <button className="text-red-500">Remove</button>
+            <div className="mt-4 flex items-center justify-between gap-3 border-t border-border pt-3">
+              <button className="btn btn-outline px-3 py-1.5 text-sm">
+                <i className="ri-eye-line" aria-hidden="true"></i> View details
+              </button>
+              <button className="flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-sm font-medium text-error transition-colors hover:bg-error-subtle">
+                <i className="ri-close-line" aria-hidden="true"></i> Remove
+              </button>
             </div>
           </div>
         </div>

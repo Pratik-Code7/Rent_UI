@@ -1,20 +1,13 @@
 import React from "react";
 
-const InfoBox = () => {
+const InfoBox = ({ icon = "ri-verified-badge-line", title = "Verified listings", text = "Every property is reviewed by our team before it goes live." }) => {
   return (
-    <div className="w-full sm:w-72 md:w-80 flex flex-col justify-center items-center gap-3 rounded-2xl p-5 ">
-      <div className="bg-white h-14 w-14 sm:h-16 sm:w-16 rounded-full flex justify-center items-center text-black text-2xl">
-        <i className="ri-verified-badge-line"></i>
+    <div className="flex flex-col gap-4 rounded-xl border border-border bg-card p-6 shadow-sm">
+      <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-accent-subtle text-accent">
+        <i className={`${icon} text-2xl`} aria-hidden="true"></i>
       </div>
-
-      <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-center">
-        Verified listing
-      </h1>
-
-      <p className="text-center text-xs sm:text-sm text-gray-600">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos,
-        voluptate. Doloribus, quisquam. Voluptas, voluptatem.
-      </p>
+      <h3 className="font-display text-lg font-semibold text-foreground">{title}</h3>
+      <p className="text-sm leading-relaxed text-muted-foreground">{text}</p>
     </div>
   );
 };

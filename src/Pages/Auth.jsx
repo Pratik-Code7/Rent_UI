@@ -1,78 +1,98 @@
 import React, { useState } from "react";
-import "./Auth.css";
+import { Link } from "react-router-dom";
 import google from "../assets/google.png";
+import logo from "../assets/logo.png";
 import { useGoogleLogin } from "@react-oauth/google";
+
 const Auth = () => {
-  const [ShowPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      console.log("Access Token:", tokenResponse.access_token);
-
-      // fetch user info from Google API
       const res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
-        headers: {
-          Authorization: `Bearer ${tokenResponse.access_token}`,
-        },
+        headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
       });
-
       const user = await res.json();
-
-      console.log("User:", user);
-
       localStorage.setItem("user", JSON.stringify(user));
     },
     onError: () => console.log("Login Failed"),
   });
+
   return (
-    <div className=" flex justify-center items-center h-screen w-screen bg-white p-5 ">
-      <div className="container bg-white rounded-2xl  flex flex-col  h-auto w-100 p-6  md:w-96">
-        <div className="textbox flex justify-center items-center flex-col mt-3  gap-1">
-          <h1 className="font-bold text-2xl">Welcome Back</h1>
-          <p className="text-l text-gray-600">Login to Continue</p>
+    <div className="flex min-h-screen items-center justify-center bg-background px-4 py-10">
+      <div className="w-full max-w-sm">
+        <div className="mb-8 flex flex-col items-center gap-4 text-center">
+          <Link to="/" aria-label="HamroRent home">
+            <img src={logo || "/placeholder.svg"} alt="HamroRent" className="h-9 w-auto object-contain" />
+          </Link>
+          <div>
+            <h1 className="font-display text-2xl font-bold text-foreground">Welcome back</h1>
+            <p className="mt-1 text-sm text-muted-foreground">Log in to continue to your account</p>
+          </div>
         </div>
-        <div className=" flex flex-col gap-2 p-5 ">
-          <label htmlFor="email">Email</label>
-          <input type="text" id="email" placeholder="Email" />
-          <label htmlFor="password">Password</label>
-          <div className="relative w-full">
-            <input
-              type={ShowPassword ? "text" : "password"}
-              id="password"
-              placeholder="Password"
-              className="w-full"
-            />
-            <button
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-              onClick={() => setShowPassword(!ShowPassword)}
-            >
-              {ShowPassword ? (
-                <i className="ri-eye-fill"></i>
-              ) : (
-                <i className="ri-eye-off-fill"></i>
-              )}
+
+        <div className="rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8">
+          <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="email" className="field-label">Email</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="you@example.com"
+                className="field-input"
+                autoComplete="email"
+              />
+            </div>
+
+            <div className="flex flex-col gap-1.5">
+              <div className="flex items-center justify-between">
+                <label htmlFor="password" className="field-label">Password</label>
+                <a href="/" className="text-xs font-medium text-primary hover:underline">Forgot?</a>
+              </div>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  placeholder="Enter your password"
+                  className="field-input pr-11"
+                  autoComplete="current-password"
+                />
+                <button
+                  type="button"
+                  className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-md text-muted-foreground hover:text-foreground"
+                  onClick={() => setShowPassword((s) => !s)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  <i className={showPassword ? "ri-eye-fill" : "ri-eye-off-fill"} aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+
+            <button type="submit" className="btn btn-primary mt-1 w-full">
+              Log in
             </button>
+          </form>
+
+          <div className="my-5 flex items-center gap-3">
+            <span className="h-px flex-1 bg-border"></span>
+            <span className="text-xs font-medium text-muted-foreground">OR</span>
+            <span className="h-px flex-1 bg-border"></span>
           </div>
-          {/* <div className="bg-green-50 flex justify-center items-center"> */}
+
           <button
-            type="submit"
-            className="bg-black text-white p-2.5 rounded-xl w-full mt-2"
-          >
-            Login
-          </button>
-          <div className=" flex justify-center items-center mt-1 mb-1 gap-4">
-            <div className="line"></div>
-            <div>OR</div>
-            <div className="line"></div>
-          </div>
-          <button
-            type="submit"
+            type="button"
             onClick={() => googleLogin()}
-            className="gbtn rounded-xl p-2.5 flex justify-center items-center gap-2 w-full"
+            className="btn btn-outline w-full"
           >
-            <img src={google} alt="Google Logo" className="w-6  " />
-            <h1>Continue with Google</h1>
+            <img src={google || "/placeholder.svg"} alt="" className="h-5 w-5" />
+            Continue with Google
           </button>
         </div>
+
+        <p className="mt-6 text-center text-sm text-muted-foreground">
+          Don&apos;t have an account?{" "}
+          <a href="/" className="font-semibold text-primary hover:underline">Sign up</a>
+        </p>
       </div>
     </div>
   );

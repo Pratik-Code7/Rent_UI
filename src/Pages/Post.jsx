@@ -1,280 +1,160 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import Navbar from "../Components/Navbar";
 
 const Post = () => {
-  const Facilities = [
-    "WiFi",
-    "Air Conditioning",
-    "Balcony",
-    "Garden",
-    "Swimming Pool",
-    "Security",
-    "Gym",
-    "Elevator",
-    "Parking",
-    "Furnished",
+  const facilities = [
+    "WiFi", "Air Conditioning", "Balcony", "Garden", "Swimming Pool",
+    "Security", "Gym", "Elevator", "Parking", "Furnished",
   ];
 
+  const Section = ({ icon, title, children }) => (
+    <section className="rounded-xl border border-border bg-card p-5 shadow-sm sm:p-6">
+      <h2 className="flex items-center gap-2 font-display text-lg font-semibold text-foreground">
+        <i className={`${icon} text-accent`} aria-hidden="true"></i>
+        {title}
+      </h2>
+      <div className="mt-5">{children}</div>
+    </section>
+  );
+
+  const Field = ({ label, children }) => (
+    <div className="flex flex-col gap-1.5">
+      <label className="field-label">{label}</label>
+      {children}
+    </div>
+  );
+
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold mb-1">Post Property</h1>
-          <p className="text-gray-600">
-            Fill the form below to publish your property.
-          </p>
+    <div className="min-h-screen bg-background">
+      <Navbar />
+
+      <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="font-display text-2xl font-bold text-foreground sm:text-3xl">Post a property</h1>
+          <p className="mt-1.5 text-muted-foreground">Fill out the details below to publish your listing.</p>
         </div>
 
-        <form className="space-y-6">
-          {/* Adds vertical spacing between child elements inside a container. */}
+        <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
           {/* BASIC DETAILS */}
-          <div className="bg-white  shadow-2xl rounded-xl p-5">
-            <h2 className="font-semibold text-lg mb-4">Basic Details</h2>
-
-            <div className="grid md:grid-cols-3 gap-4">
-              <div>
-                <label className="text-sm">Property Title</label>
-                <input
-                  type="text"
-                  placeholder="Enter property title"
-                  className="w-full mt-1 border border-gray-500 rounded-lg p-2"
-                />
-              </div>
-
-              <div>
-                <label className="text-sm">Property Type</label>
-                <select className="w-full mt-1 border border-gray-500 rounded-lg p-2">
-                  <option>Select Type</option>
-                  <option>Apartment</option>
-                  <option>House</option>
-                  <option>Villa</option>
-                  <option>Office</option>
+          <Section icon="ri-information-line" title="Basic Details">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              <Field label="Property Title">
+                <input type="text" placeholder="e.g. Modern 2BHK Apartment" className="field-input" />
+              </Field>
+              <Field label="Property Type">
+                <select className="field-input appearance-none" defaultValue="">
+                  <option value="" disabled>Select type</option>
+                  <option>Apartment</option><option>House</option><option>Villa</option><option>Office</option>
                 </select>
-              </div>
-
-              <div>
-                <label className="text-sm">Property Status</label>
-                <select className="w-full mt-1 border border-gray-500 rounded-lg p-2">
-                  <option>Select Status</option>
-                  <option>For Sale</option>
-                  <option>For Rent</option>
+              </Field>
+              <Field label="Status">
+                <select className="field-input appearance-none" defaultValue="">
+                  <option value="" disabled>Select status</option>
+                  <option>For Sale</option><option>For Rent</option>
                 </select>
-              </div>
-
+              </Field>
               <div className="md:col-span-3">
-                <label className="text-sm">Description</label>
-                <textarea
-                  rows="4"
-                  placeholder="Enter property description"
-                  className="w-full mt-1 border border-gray-500 rounded-lg p-2"
-                />
+                <Field label="Description">
+                  <textarea rows="4" placeholder="Describe the property, neighbourhood and highlights..." className="field-input resize-none" />
+                </Field>
               </div>
             </div>
-          </div>
+          </Section>
+
           {/* PRICING & LOCATION */}
-          <div className="bg-white shadow-2xl rounded-xl p-5">
-            <h2 className="font-semibold text-lg mb-4">Pricing & Location</h2>
-
-            <div className="grid md:grid-cols-3 gap-4">
-              <div>
-                <label className="text-sm">Price</label>
-                <input
-                  type="number"
-                  placeholder="Enter price"
-                  className="w-full mt-1 border border-gray-500 rounded-lg p-2"
-                />
-              </div>
-
-              <div>
-                <label className="text-sm">Currency</label>
-                <select className="w-full mt-1 border border-gray-500 rounded-lg p-2">
-                  <option>USD ($)</option>
-                  <option>NPR (Rs)</option>
-                  <option>INR (₹)</option>
+          <Section icon="ri-map-pin-line" title="Pricing & Location">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              <Field label="Price">
+                <input type="number" placeholder="Enter price" className="field-input" />
+              </Field>
+              <Field label="Currency">
+                <select className="field-input appearance-none">
+                  <option>NPR (Rs)</option><option>USD ($)</option><option>INR (₹)</option>
                 </select>
-              </div>
-
-              <div>
-                <label className="text-sm">Negotiable</label>
-                <select className="w-full mt-1 border border-gray-500  rounded-lg p-2">
-                  <option>Select</option>
-                  <option>Yes</option>
-                  <option>No</option>
+              </Field>
+              <Field label="Negotiable">
+                <select className="field-input appearance-none" defaultValue="">
+                  <option value="" disabled>Select</option><option>Yes</option><option>No</option>
                 </select>
-              </div>
-
-              <div>
-                <label className="text-sm">Country</label>
-                <select className="w-full mt-1 border border-gray-500 rounded-lg p-2">
-                  <option>Select Country</option>
-                  <option>Nepal</option>
-                  <option>India</option>
+              </Field>
+              <Field label="Country">
+                <select className="field-input appearance-none">
+                  <option>Nepal</option><option>India</option>
                 </select>
-              </div>
-
-              <div>
-                <label className="text-sm">City</label>
-                <select className="w-full mt-1 border border-gray-500 rounded-lg p-2">
-                  <option>Select City</option>
-                  <option>Kathmandu</option>
-                  <option>Pokhara</option>
+              </Field>
+              <Field label="City">
+                <select className="field-input appearance-none" defaultValue="">
+                  <option value="" disabled>Select city</option><option>Kathmandu</option><option>Pokhara</option>
                 </select>
-              </div>
-
-              <div>
-                <label className="text-sm">Address</label>
-                <input
-                  type="text"
-                  placeholder="Enter address"
-                  className="w-full mt-1 border border-gray-500 rounded-lg p-2"
-                />
-              </div>
-
-              <div className="md:col-span-3">
-                <label className="text-sm">Location on Map (Optional)</label>
-                <input
-                  type="text"
-                  placeholder="Search location on Google Maps"
-                  className="w-full mt-1 border border-gray-500 rounded-lg p-2"
-                />
-              </div>
+              </Field>
+              <Field label="Address">
+                <input type="text" placeholder="Street, area" className="field-input" />
+              </Field>
             </div>
-          </div>
+          </Section>
+
           {/* PROPERTY DETAILS */}
-          <div className="bg-white shadow-2xl rounded-xl p-5">
-            <h2 className="font-semibold text-lg mb-4">Property Details</h2>
-
-            <div className="grid md:grid-cols-4 gap-4">
-              <div>
-                <label className="text-sm">Area (sq ft)</label>
-                <input
-                  type="number"
-                  placeholder="Enter area"
-                  className="w-full mt-1 border border-gray-500 rounded-lg p-2"
-                />
-              </div>
-
-              <div>
-                <label className="text-sm">Bedrooms</label>
-                <input
-                  type="number"
-                  placeholder="Enter bedrooms"
-                  className="w-full mt-1 border border-gray-500 rounded-lg p-2"
-                />
-              </div>
-
-              <div>
-                <label className="text-sm">Bathrooms</label>
-                <input
-                  type="number"
-                  placeholder="Enter bathrooms"
-                  className="w-full mt-1 border border-gray-500 rounded-lg p-2"
-                />
-              </div>
-
-              <div>
-                <label className="text-sm">Floors</label>
-                <input
-                  type="number"
-                  placeholder="Enter floors"
-                  className="w-full mt-1 border border-gray-500 rounded-lg p-2"
-                />
-              </div>
-
-              <div>
-                <label className="text-sm">Parking Spaces</label>
-                <input
-                  type="number"
-                  placeholder="Parking spaces"
-                  className="w-full mt-1 border border-gray-500 rounded-lg p-2"
-                />
-              </div>
-
-              <div>
-                <label className="text-sm">Year Built</label>
-                <input
-                  type="number"
-                  placeholder="Year built"
-                  className="w-full mt-1 border border-gray-500 rounded-lg p-2"
-                />
-              </div>
+          <Section icon="ri-home-gear-line" title="Property Details">
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
+              {["Area (sqft)", "Bedrooms", "Bathrooms", "Floors", "Parking", "Year Built"].map((label) => (
+                <Field key={label} label={label}>
+                  <input type="number" placeholder="0" className="field-input" />
+                </Field>
+              ))}
             </div>
-          </div>
-          {/* Facilities */}
-          <div className="bg-white shadow-2xl rounded-xl p-5">
-            <h2 className="font-semibold text-lg mb-4">Facilities</h2>
+          </Section>
 
-            <div className="grid md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-3">
-              {Facilities.map((item) => (
+          {/* FACILITIES */}
+          <Section icon="ri-service-line" title="Facilities">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
+              {facilities.map((item) => (
                 <label
                   key={item}
-                  className="flex items-center gap-2 border border-gray-500 rounded-lg p-3 cursor-pointer hover:bg-gray-50"
+                  className="flex cursor-pointer items-center gap-2 rounded-lg border border-input p-3 text-sm text-foreground transition-colors hover:border-primary hover:bg-muted"
                 >
-                  <input type="checkbox" />
-                  <span className="text-sm">{item}</span>
+                  <input type="checkbox" className="h-4 w-4 accent-[var(--color-primary)]" />
+                  {item}
                 </label>
               ))}
             </div>
-          </div>
-          {/* PROPERTY IMAGES */}
-          <div className="bg-white shadow-2xl rounded-xl p-5">
-            <h2 className="font-semibold text-lg mb-4">Property Images</h2>
+          </Section>
 
-            <div className="border-2 border-dashed rounded-xl p-10 text-center">
-              <input type="file" multiple accept="image/*" className="mb-3" />
+          {/* IMAGES */}
+          <Section icon="ri-image-add-line" title="Property Images">
+            <label className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-input p-10 text-center transition-colors hover:border-primary hover:bg-muted">
+              <i className="ri-upload-cloud-2-line text-3xl text-muted-foreground" aria-hidden="true"></i>
+              <span className="text-sm font-medium text-foreground">Click to upload images</span>
+              <span className="text-xs text-muted-foreground">PNG or JPG, up to 5MB each</span>
+              <input type="file" multiple accept="image/*" className="sr-only" />
+            </label>
+          </Section>
+
+          {/* CONTACT */}
+          <Section icon="ri-contacts-line" title="Contact Information">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              <Field label="Your Name">
+                <input type="text" placeholder="Full name" className="field-input" />
+              </Field>
+              <Field label="Phone Number">
+                <input type="tel" placeholder="+977 98XXXXXXXX" className="field-input" />
+              </Field>
+              <Field label="Email Address">
+                <input type="email" placeholder="you@example.com" className="field-input" />
+              </Field>
             </div>
-          </div>
-          {/* CONTACT INFORMATION */}
-          <div className="bg-white shadow-2xl rounded-xl p-5">
-            <h2 className="font-semibold text-lg mb-4">Contact Information</h2>
+            <label className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
+              <input type="checkbox" className="h-4 w-4 accent-[var(--color-primary)]" />
+              I agree to the Terms &amp; Conditions
+            </label>
+          </Section>
 
-            <div className="grid md:grid-cols-3 gap-4">
-              <div>
-                <label className="text-sm">Your Name</label>
-                <input
-                  type="text"
-                  placeholder="Enter your name"
-                  className="w-full mt-1 border border-gray-500 rounded-lg p-2"
-                />
-              </div>
-
-              <div>
-                <label className="text-sm">Phone Number</label>
-                <input
-                  type="tel"
-                  placeholder="Enter phone number"
-                  className="w-full mt-1 border border-gray-500 rounded-lg p-2"
-                />
-              </div>
-
-              <div>
-                <label className="text-sm">Email Address</label>
-                <input
-                  type="email"
-                  placeholder="Enter email"
-                  className="w-full mt-1 border border-gray-500 rounded-lg p-2"
-                />
-              </div>
-            </div>
-
-            <div className="mt-4">
-              <label className="flex items-center gap-2 text-sm">
-                <input type="checkbox" />I agree to the Terms & Conditions
-              </label>
-            </div>
-          </div>
-          {/* BUTTONS */}
-          <div className="flex justify-between">
-            <a
-              href="/"
-              className="shadow-2xl px-6 py-3 rounded-lg bg-white hover:bg-gray-100"
-            >
-              Cancel
-            </a>
-
-            <button
-              type="submit"
-              className="bg-black text-white px-8 py-3 rounded-lg "
-            >
+          {/* ACTIONS */}
+          <div className="flex flex-col-reverse items-center gap-3 sm:flex-row sm:justify-end">
+            <Link to="/" className="btn btn-outline w-full sm:w-auto">Cancel</Link>
+            <button type="submit" className="btn btn-accent w-full sm:w-auto">
+              <i className="ri-send-plane-line" aria-hidden="true"></i>
               Publish Property
             </button>
           </div>

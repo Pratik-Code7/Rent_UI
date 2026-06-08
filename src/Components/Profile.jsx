@@ -1,114 +1,82 @@
 import React from "react";
 
 const Profile = () => {
-  return (
-    <>
-      {" "}
-      <div className="px-4 py-2 md:px-6 md:py-4 ">
-        <h1 className="text-2xl md:text-3xl font-bold">My Properties</h1>
-        <p className="text-gray-500">
-          Manage your active properties and track their performance.
-        </p>
-      </div>
-      <div className="w-full  flex flex-col lg:flex-row gap-6 p-4 md:p-6">
-        {/* LEFT SIDE */}
-        <div className="bg-white w-full lg:w-1/3 rounded-xl border border-gray-300 shadow p-5 flex flex-col gap-5">
-          {/* Top Section */}
-          <div className="flex flex-col items-center justify-center text-center gap-3">
-            <div className="h-20 w-20 bg-gray-200 rounded-full"></div>
+  const infoItems = [
+    { icon: "ri-time-line", label: "Member Since", value: "May 12, 2023" },
+    { icon: "ri-map-pin-line", label: "Location", value: "Kathmandu, Nepal" },
+    { icon: "ri-phone-line", label: "Phone", value: "+977 98XXXXXXXX" },
+  ];
 
+  const fields = [
+    { label: "Full Name", type: "text", placeholder: "Pratik Shakya" },
+    { label: "Email", type: "email", placeholder: "you@example.com" },
+    { label: "Phone Number", type: "tel", placeholder: "+977 98XXXXXXXX" },
+    { label: "Location", type: "text", placeholder: "Kathmandu, Nepal" },
+  ];
+
+  return (
+    <div className="flex w-full flex-col gap-6">
+      <div>
+        <h1 className="font-display text-2xl font-bold text-foreground sm:text-3xl">Profile Settings</h1>
+        <p className="mt-1 text-muted-foreground">Manage your account information and preferences.</p>
+      </div>
+
+      <div className="flex w-full flex-col gap-6 lg:flex-row">
+        {/* LEFT: identity card */}
+        <div className="flex w-full flex-col gap-5 rounded-xl border border-border bg-card p-6 shadow-sm lg:w-1/3">
+          <div className="flex flex-col items-center gap-3 text-center">
+            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary text-2xl font-semibold text-primary-foreground">
+              PS
+            </div>
             <div>
-              <h1 className="text-xl font-semibold">Pratik Shakya</h1>
-              <p className="text-gray-500 text-sm">xxx@gmail.com</p>
+              <h2 className="font-display text-lg font-semibold text-foreground">Pratik Shakya</h2>
+              <p className="text-sm text-muted-foreground">pratik@gmail.com</p>
             </div>
           </div>
 
-          {/* Info Section */}
           <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-3 border border-gray-400 rounded-xl p-3">
-              <i className="ri-time-line text-xl"></i>
-              <div>
-                <h1 className="font-medium">Member Since</h1>
-                <p className="text-sm text-gray-500">May 12, 2023</p>
+            {infoItems.map((item) => (
+              <div key={item.label} className="flex items-center gap-3 rounded-lg border border-border p-3">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-muted text-primary">
+                  <i className={`${item.icon} text-lg`} aria-hidden="true"></i>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-foreground">{item.label}</p>
+                  <p className="text-sm text-muted-foreground">{item.value}</p>
+                </div>
               </div>
-            </div>
-
-            <div className="flex items-center gap-3 border border-gray-400 rounded-xl p-3">
-              <i className="ri-map-pin-line text-xl"></i>
-              <div>
-                <h1 className="font-medium">Location</h1>
-                <p className="text-sm text-gray-500">Kathmandu, Nepal</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3 border border-gray-400 rounded-xl p-3">
-              <i className="ri-phone-line text-xl"></i>
-              <div>
-                <h1 className="font-medium">Phone</h1>
-                <p className="text-sm text-gray-500">+977 XXXXXXXX</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
 
-        {/* RIGHT SIDE */}
-        <div className="bg-white w-full lg:w-2/3 rounded-xl border border-gray-300 shadow p-6 md:p-8 flex flex-col gap-5">
-          {/* Header */}
+        {/* RIGHT: edit form */}
+        <div className="flex w-full flex-col gap-5 rounded-xl border border-border bg-card p-6 shadow-sm md:p-8 lg:w-2/3">
           <div>
-            <h1 className="text-lg font-bold">Profile Settings</h1>
-            <p className="text-sm text-gray-600">
-              Manage your account information and preferences.
-            </p>
+            <h2 className="font-display text-lg font-semibold text-foreground">Personal information</h2>
+            <p className="text-sm text-muted-foreground">Update your details so owners can reach you.</p>
           </div>
 
-          {/* FORM */}
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div className="flex flex-col gap-1">
-              <label>Full Name</label>
-              <input
-                className="p-2 rounded-lg border border-gray-300"
-                type="text"
-              />
+          <form className="grid grid-cols-1 gap-5 md:grid-cols-2" onSubmit={(e) => e.preventDefault()}>
+            {fields.map((f) => (
+              <div key={f.label} className="flex flex-col gap-1.5">
+                <label className="field-label">{f.label}</label>
+                <input className="field-input" type={f.type} placeholder={f.placeholder} />
+              </div>
+            ))}
+
+            <div className="flex flex-col gap-1.5 md:col-span-2">
+              <label className="field-label">Bio</label>
+              <textarea className="field-input h-28 resize-none" placeholder="Tell others a little about yourself..." />
             </div>
 
-            <div className="flex flex-col gap-1">
-              <label>Email</label>
-              <input
-                className="p-2 rounded-lg border border-gray-300"
-                type="text"
-              />
-            </div>
-
-            <div className="flex flex-col gap-1">
-              <label>Phone Number</label>
-              <input
-                className="p-2 rounded-lg border border-gray-300"
-                type="text"
-              />
-            </div>
-
-            <div className="flex flex-col gap-1">
-              <label>Location</label>
-              <input
-                className="p-2 rounded-lg border border-gray-300"
-                type="text"
-              />
-            </div>
-
-            <div className="flex flex-col gap-1 md:col-span-2">
-              <label>Bio</label>
-              <textarea className="p-2 rounded-lg border border-gray-300 h-24"></textarea>
-            </div>
-
-            <div className="md:col-span-2 flex justify-end">
-              <button className="bg-black text-white px-4 py-2 rounded-lg">
-                Save Changes
-              </button>
+            <div className="flex justify-end gap-3 md:col-span-2">
+              <button type="reset" className="btn btn-outline">Cancel</button>
+              <button type="submit" className="btn btn-primary">Save changes</button>
             </div>
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

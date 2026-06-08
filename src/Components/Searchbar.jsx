@@ -1,129 +1,92 @@
 import React, { useState } from "react";
-import "./Searchbar.css";
+
 const Searchbar = () => {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState("Buy");
+
+  const tabs = ["Buy", "Rent", "Sell"];
+
   const primeLocations = [
-    "Baluwatar",
-    "Bhaisepati",
-    "Budhanilkantha",
-    "Durbar Marg",
-    "Hattisar",
-    "Jawalakhel",
-    "Jhamsikhel",
-    "Kalanki",
-    "Kamaladi",
-    "Kirtipur",
-    "Kupondole",
-    "Lazimpat",
-    "Lokanthali",
-    "Madhyapur Thimi",
-    "Maharajgunj",
-    "Naxal",
-    "New Road",
-    "Patan Dhoka",
-    "Pulchowk",
-    "Putalisadak",
-    "Sallaghari",
-    "Sanepa",
-    "Sitapaila",
-    "Suryabinayak",
-    "Thamel",
-    "Tokha",
+    "Baluwatar", "Bhaisepati", "Budhanilkantha", "Durbar Marg", "Hattisar",
+    "Jawalakhel", "Jhamsikhel", "Kalanki", "Kamaladi", "Kirtipur", "Kupondole",
+    "Lazimpat", "Lokanthali", "Madhyapur Thimi", "Maharajgunj", "Naxal",
+    "New Road", "Patan Dhoka", "Pulchowk", "Putalisadak", "Sallaghari",
+    "Sanepa", "Sitapaila", "Suryabinayak", "Thamel", "Tokha",
   ];
+
+  const typeOptions = {
+    Buy: ["House", "Apartment", "Penthouse", "Land"],
+    Rent: ["Office Space", "Duplex", "House", "Apartment", "Land"],
+    Sell: ["Residential House", "Apartment", "Flat", "Commercial Property", "Retail Shop", "Land", "Penthouse"],
+  };
+
+  const selectClass =
+    "h-11 w-full appearance-none rounded-lg border border-input bg-card px-3 text-sm text-foreground outline-none transition-colors focus:border-primary focus:ring-3 focus:ring-primary/10";
+
   return (
-    <div className="searchbar w-full  bg-white  rounded-2xl px-5 py-3 flex flex-col gap-2 ">
-      <div className="top flex flex-col md:flex-row md:justify-between md:items-center ">
-        <div className="left  flex justify-between items-center  h-10 gap-3 font-bold bg-gray-100 rounded-full px-2 ">
+    <div className="w-full max-w-3xl rounded-2xl border border-border bg-card p-3 shadow-lg sm:p-4">
+      {/* Segmented control */}
+      <div className="mb-3 inline-flex rounded-lg bg-muted p-1">
+        {tabs.map((tab) => (
           <button
-            onClick={() => setActive(1)}
-            className={active === 1 ? "bg-black text-white" : " text-gray-700"}
+            key={tab}
+            onClick={() => setActive(tab)}
+            className={`rounded-md px-5 py-1.5 text-sm font-semibold transition-colors ${
+              active === tab
+                ? "bg-card text-primary shadow-xs"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
           >
-            Buy
+            {tab}
           </button>
-          <button
-            onClick={() => setActive(2)}
-            className={active === 2 ? "bg-black text-white" : " text-gray-700"}
-          >
-            Rent
-          </button>
-          <button
-            onClick={() => setActive(3)}
-            className={active === 3 ? "bg-black text-white" : " text-gray-700"}
-          >
-            Sell
-          </button>
-        </div>
-        {/* <div className="bg-blue-500  ">
-          <i class="ri-star-line"></i>
-          <p>4.5 Review()</p>
-        </div> */}
-        <div className="right"></div>
+        ))}
       </div>
-      <div className="search flex flex-col md:flex-row items-center gap-3 pb-2">
-        <div>
-          <p>Location</p>
-          <select name="" id="">
-            <option value="a" selected disabled>
-              Select Location
-            </option>
-            {primeLocations.map((location) => (
-              <option value="">{location}</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <p>Property Type</p>
-          <select name="" id="">
-            <option value="a" selected>
-              Individual
-            </option>
-            {active === 1 && (
-              <>
-                <option value="">House</option>
-                <option value="">Apartment</option>
-                <option value="">Penthouse</option>
-                <option value="">Land</option>
-              </>
-            )}
-            {active === 2 && (
-              <>
-                <option value="">Office Space</option>
-                <option value="">Duplex</option>
-                <option value="">House</option>
-                <option value="">Apartment</option>
-                <option value="">Land</option>
-              </>
-            )}
-            {active === 3 && (
-              <>
-                <option value="">Residential House</option>
-                <option value="">Apartment</option>
-                <option value="">Flat</option>
-                <option value="">Commercial Property</option>
-                <option value="">Retail Shop</option>
-                <option value="">Land</option>
-                <option value="">Penthouse</option>
-              </>
-            )}
-          </select>
-        </div>
-        <div>
-          <p>Price</p>
-          <select name="" id="">
-            <option value="a" selected>
-              $10000 - $50000
-            </option>
-            <option value="">$50000 - $100000</option>
-            <option value="">$100000 - $200000</option>
-            <option value="">$200000 - $500000</option>
-            <option value="">$500000 - $1000000</option>
-          </select>
-        </div>
-        <div>
-          <button className="bg-black text-white px-4 py-1.5 rounded-[50px]  mt-5">
-            Search
-          </button>
-        </div>
+
+      {/* Filters */}
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_1fr_auto] lg:items-end">
+        <label className="flex flex-col gap-1.5">
+          <span className="text-xs font-medium text-muted-foreground">Location</span>
+          <div className="relative">
+            <select className={selectClass} defaultValue="">
+              <option value="" disabled>Select location</option>
+              {primeLocations.map((loc) => (
+                <option key={loc} value={loc}>{loc}</option>
+              ))}
+            </select>
+            <i className="ri-arrow-down-s-line pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" aria-hidden="true"></i>
+          </div>
+        </label>
+
+        <label className="flex flex-col gap-1.5">
+          <span className="text-xs font-medium text-muted-foreground">Property type</span>
+          <div className="relative">
+            <select className={selectClass} defaultValue="">
+              <option value="">Any type</option>
+              {typeOptions[active].map((opt) => (
+                <option key={opt} value={opt}>{opt}</option>
+              ))}
+            </select>
+            <i className="ri-arrow-down-s-line pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" aria-hidden="true"></i>
+          </div>
+        </label>
+
+        <label className="flex flex-col gap-1.5">
+          <span className="text-xs font-medium text-muted-foreground">Price range</span>
+          <div className="relative">
+            <select className={selectClass} defaultValue="">
+              <option value="">Any price</option>
+              <option>Rs 10k - 50k</option>
+              <option>Rs 50k - 1L</option>
+              <option>Rs 1L - 5L</option>
+              <option>Rs 5L+</option>
+            </select>
+            <i className="ri-arrow-down-s-line pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" aria-hidden="true"></i>
+          </div>
+        </label>
+
+        <button className="btn btn-accent h-11 lg:w-auto">
+          <i className="ri-search-line" aria-hidden="true"></i>
+          Search
+        </button>
       </div>
     </div>
   );

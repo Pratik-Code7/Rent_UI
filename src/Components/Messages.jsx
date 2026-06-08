@@ -1,24 +1,41 @@
 import React from "react";
 
 const Messages = () => {
+  const notifications = [
+    { icon: "ri-eye-line", title: "Your listing was viewed by 2 people", text: "Modern Apartment in Lazimpat is getting attention.", time: "2 hours ago", unread: true },
+    { icon: "ri-question-answer-line", title: "New inquiry received", text: "Someone is interested in your City Penthouse.", time: "5 hours ago", unread: true },
+    { icon: "ri-heart-line", title: "Your property was saved", text: "Luxury Villa was added to someone's favorites.", time: "Yesterday", unread: false },
+    { icon: "ri-checkbox-circle-line", title: "Listing approved", text: "Cozy Family House is now live on HamroRent.", time: "2 days ago", unread: false },
+  ];
+
   return (
-    <div className="dash-right overflow-y-auto h-full  w-full flex flex-col p-4 md:p-8 gap-5  ">
-      <h1 className="text-2xl font-bold ">Notifications</h1>
-      {/* msg box */}
-      <div className="msg w-full bg-white shadow py-4 flex items-center  px-6 shrink-0 rounded-xl gap-5">
-        <div className="nCircle h-14 w-14 bg-gray-200 rounded-full shrink-0 flex justify-center items-center text-2xl">
-          <i className="ri-notification-2-line"></i>
-        </div>
-        <div className="N-info">
-          <h1 className="text-sm md:text-lg font-semibold">
-            Viewed by 2 people
-          </h1>
-          <p className=" text-xs md:text-sm">Lorem ipsum dolor sit amet</p>
-        </div>
-        {/*whitespace-nowrap= It prevents text from wrapping to the next line. */}
-        <div className="N-time text-xs text-gray-700 ml-auto  whitespace-nowrap">
-          <h1>2 hours ago</h1>
-        </div>
+    <div className="flex w-full flex-col gap-6">
+      <div>
+        <h1 className="font-display text-2xl font-bold text-foreground sm:text-3xl">Notifications</h1>
+        <p className="mt-1 text-muted-foreground">Stay updated on activity across your listings.</p>
+      </div>
+
+      <div className="flex flex-col gap-3">
+        {notifications.map((n, idx) => (
+          <div
+            key={idx}
+            className={`flex items-start gap-4 rounded-xl border bg-card p-4 shadow-sm sm:p-5 ${
+              n.unread ? "border-accent/30" : "border-border"
+            }`}
+          >
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-muted text-xl text-primary">
+              <i className={n.icon} aria-hidden="true"></i>
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2">
+                <h2 className="font-medium text-foreground">{n.title}</h2>
+                {n.unread && <span className="h-2 w-2 shrink-0 rounded-full bg-accent" aria-label="Unread"></span>}
+              </div>
+              <p className="mt-0.5 text-sm text-muted-foreground">{n.text}</p>
+            </div>
+            <span className="shrink-0 whitespace-nowrap text-xs text-muted-foreground">{n.time}</span>
+          </div>
+        ))}
       </div>
     </div>
   );
