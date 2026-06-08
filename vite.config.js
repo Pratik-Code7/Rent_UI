@@ -2,9 +2,11 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [react(), tailwindcss()],
-  base: "/Rent_UI/",
+  // Use the GitHub Pages sub-path only for production builds.
+  // Dev/preview is served from the root so it loads correctly here.
+  base: command === "build" ? "/Rent_UI/" : "/",
   server: {
     hmr: true,
     watch: {
@@ -12,4 +14,4 @@ export default defineConfig({
       interval: 100,
     },
   },
-});
+}));
