@@ -2,11 +2,10 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
-export default defineConfig(({ command }) => ({
+export default defineConfig({
   plugins: [react(), tailwindcss()],
-  // Use the GitHub Pages sub-path only for production builds.
-  // Dev/preview is served from the root so it loads correctly here.
-  base: command = "/",
+  // Serve from root so assets resolve correctly on Vercel and in preview.
+  base: "/",
   server: {
     hmr: true,
     watch: {
@@ -14,4 +13,4 @@ export default defineConfig(({ command }) => ({
       interval: 100,
     },
   },
-}));
+});

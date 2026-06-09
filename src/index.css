@@ -6,35 +6,36 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Plus Jakarta Sans", "Inter", ui-sans-serif, sans-serif;
 
-  /* Brand: deep navy + warm orange (from logo) */
-  --color-background: #f7f8fa;
-  --color-foreground: #0e1726;
+  /* Brand: modern startup — indigo + emerald (Airbnb/Zillow-style) */
+  --color-background: #f8fafc;
+  --color-foreground: #0f172a;
   --color-card: #ffffff;
-  --color-card-foreground: #0e1726;
+  --color-card-foreground: #0f172a;
 
-  --color-primary: #122a4f;
-  --color-primary-hover: #0d2042;
+  --color-primary: #4f46e5;
+  --color-primary-hover: #4338ca;
   --color-primary-foreground: #ffffff;
+  --color-primary-subtle: #eef2ff;
 
-  --color-accent: #f3852a;
-  --color-accent-hover: #e0741b;
+  --color-accent: #10b981;
+  --color-accent-hover: #059669;
   --color-accent-foreground: #ffffff;
-  --color-accent-subtle: #fff3e8;
+  --color-accent-subtle: #ecfdf5;
 
   /* Neutrals */
-  --color-muted: #f1f3f6;
-  --color-muted-foreground: #5b6678;
-  --color-border: #e3e7ee;
-  --color-input: #d7dce5;
-  --color-ring: #122a4f;
+  --color-muted: #f1f5f9;
+  --color-muted-foreground: #64748b;
+  --color-border: #e2e8f0;
+  --color-input: #cbd5e1;
+  --color-ring: #4f46e5;
 
   /* Status */
-  --color-success: #15803d;
-  --color-success-subtle: #e8f5ee;
-  --color-warning: #b45309;
-  --color-warning-subtle: #fdf3e7;
+  --color-success: #059669;
+  --color-success-subtle: #ecfdf5;
+  --color-warning: #d97706;
+  --color-warning-subtle: #fffbeb;
   --color-error: #dc2626;
-  --color-error-subtle: #fdeaea;
+  --color-error-subtle: #fef2f2;
 
   /* Radius */
   --radius-xs: 0.375rem;
@@ -44,10 +45,10 @@
   --radius-xl: 1.25rem;
 
   /* Shadows: subtle, layered */
-  --shadow-xs: 0 1px 2px 0 rgb(14 23 38 / 0.05);
-  --shadow-sm: 0 1px 3px 0 rgb(14 23 38 / 0.08), 0 1px 2px -1px rgb(14 23 38 / 0.06);
-  --shadow-md: 0 4px 12px -2px rgb(14 23 38 / 0.08), 0 2px 6px -2px rgb(14 23 38 / 0.05);
-  --shadow-lg: 0 12px 28px -8px rgb(14 23 38 / 0.12), 0 4px 10px -4px rgb(14 23 38 / 0.06);
+  --shadow-xs: 0 1px 2px 0 rgb(15 23 42 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(15 23 42 / 0.08), 0 1px 2px -1px rgb(15 23 42 / 0.06);
+  --shadow-md: 0 4px 12px -2px rgb(15 23 42 / 0.08), 0 2px 6px -2px rgb(15 23 42 / 0.05);
+  --shadow-lg: 0 12px 28px -8px rgb(15 23 42 / 0.12), 0 4px 10px -4px rgb(15 23 42 / 0.06);
 }
 
 @layer base {
@@ -103,7 +104,7 @@
   .field-input:focus {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgb(18 42 79 / 0.1);
+    box-shadow: 0 0 0 3px rgb(79 70 229 / 0.12);
   }
 
   /* Buttons */
